@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Api.Domain.DTOs;
+using Api.Domain.DTOs.Perfil;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces.Services.UsuarioService;
 using Api.Domain.Repository;
@@ -17,18 +18,27 @@ namespace Api.Service.Services
     {
         private IUsuarioRepository _repository;
 
+        private IPerfilRepository _perfilRepository;
+
         private SigningConfigurations _signingConfigurations;
 
         private TokenConfiguration _tokenConfiguration;
 
+        public LoginService(IConfiguration _configuration)
+        {
+            this._configuration = _configuration;
+
+        }
         private IConfiguration _configuration { get; }
 
         public LoginService(IUsuarioRepository repository,
+                            IPerfilRepository perfilRepository,
                             SigningConfigurations signingConfigurations,
                             TokenConfiguration tokenConfiguration,
                             IConfiguration configuration)
         {
             _repository = repository;
+            _perfilRepository = perfilRepository;
             _signingConfigurations = signingConfigurations;
             _tokenConfiguration = tokenConfiguration;
             _configuration = configuration;
@@ -54,7 +64,7 @@ namespace Api.Service.Services
                 }
                 else
                 {
-                    if(baseUsuario.Ativo != true)
+                    if (baseUsuario.Ativo != true)
                     {
                         return new
                         {
@@ -63,7 +73,8 @@ namespace Api.Service.Services
                         };
                     }
                     var senhaCripto = Criptografia.Cripto(login.Senha);
-                    if(senhaCripto == baseUsuario.Senha){
+                    if (senhaCripto == baseUsuario.Senha)
+                    {
                         ClaimsIdentity identity = new ClaimsIdentity(
                         new GenericIdentity(login.Email),
                         new[]
@@ -80,9 +91,16 @@ namespace Api.Service.Services
 
                         string token = CreateToken(identity, dataCriacao, dataExpiracao, handler);
 
+                        var perfil = new Perfil();
+                        perfil = await _perfilRepository.SelectAsync(baseUsuario.PerfilID);
+
+                        baseUsuario.Perfil.Id = perfil.Id;
+                        baseUsuario.Perfil.Nome = perfil.Nome;
+
                         return SuccessObject(dataCriacao, dataExpiracao, token, baseUsuario);
                     }
-                    else{
+                    else
+                    {
                         return new
                         {
                             authenticated = false,
@@ -95,15 +113,16 @@ namespace Api.Service.Services
             else
             {
                 return new
-                    {
-                        authenticated = false,
-                        message = "Falha ao autenticar!"
-                    };
+                {
+                    authenticated = false,
+                    message = "Falha ao autenticar!"
+                };
             }
 
         }
 
-        private string CreateToken(ClaimsIdentity identity, DateTime dataCriacao, DateTime dataExpiracao, JwtSecurityTokenHandler handler){
+        private string CreateToken(ClaimsIdentity identity, DateTime dataCriacao, DateTime dataExpiracao, JwtSecurityTokenHandler handler)
+        {
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
                 Issuer = _tokenConfiguration.Issuer,
@@ -121,14 +140,19 @@ namespace Api.Service.Services
 
         private object SuccessObject(DateTime dataCriacao, DateTime dataExpiracao, string token, Usuario usuario)
         {
+
             return new
             {
                 authenticated = true,
                 created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
                 accessToken = token,
-                user = new {nome = usuario.Nome,
-                            email = usuario.Email},
+                user = new
+                {
+                    nome = usuario.Nome,
+                    email = usuario.Email,
+                    perfil = usuario.Perfil.Nome
+                },
                 message = "Usuário logado com sucesso!"
             };
         }

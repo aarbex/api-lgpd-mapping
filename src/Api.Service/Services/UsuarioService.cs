@@ -75,6 +75,10 @@ namespace Api.Service.Services
 
             var entity = _mapper.Map<Usuario>(model);
 
+            var entidade = await _repository.SelectAsync(id);
+
+            entity.Senha = entidade.Senha;
+
             var result = await _repository.UpdateAsync(id, entity);
 
             return _mapper.Map<UsuarioDTOUpdateResult>(result);
