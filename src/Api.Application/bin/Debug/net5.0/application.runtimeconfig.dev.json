@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/aarbex/.dotnet/store/|arch|/|tfm|",
+      "/home/aarbex/.nuget/packages"
+    ]
+  }
+}
