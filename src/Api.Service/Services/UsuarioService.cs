@@ -14,14 +14,16 @@ namespace Api.Service.Services
     public class UsuarioService : IUsuarioService
     {
         private IRepository<Usuario> _repository;
+        private IRepository<Perfil> _perfilRepository;
         private readonly IMapper _mapper;
 
         private IUsuarioRepository _usuarioRepository;
 
-        public UsuarioService(IRepository<Usuario> repository, IMapper mapper, IUsuarioRepository usuarioRepository)
+        public UsuarioService(IRepository<Usuario> repository, IRepository<Perfil> perfilRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
         {
             _repository = repository;
             _usuarioRepository = usuarioRepository;
+            _perfilRepository = perfilRepository;
             _mapper = mapper;
         }
 
@@ -33,12 +35,24 @@ namespace Api.Service.Services
         public async Task<UsuarioDTO> Get(int id)
         {
             var entity = await _repository.SelectAsync(id);
+            var perfil = await _perfilRepository.SelectAsync(entity.PerfilID);
+            entity.Perfil.Nome = perfil.Nome;
+            entity.Perfil.Ativo = perfil.Ativo;
+            entity.Perfil.DataCadastro = perfil.DataCadastro;
+            entity.Perfil.DataAtualizacao = perfil.DataAtualizacao;
             return _mapper.Map<UsuarioDTO>(entity) ?? new UsuarioDTO();
         }
 
         public async Task<IEnumerable<UsuarioDTO>> GetAll()
         {
             var listEntity = await _repository.SelectAsync();
+            foreach(var entity in listEntity){
+                var perfil = await _perfilRepository.SelectAsync(entity.PerfilID);
+                entity.Perfil.Nome = perfil.Nome;
+                entity.Perfil.Ativo = perfil.Ativo;
+                entity.Perfil.DataCadastro = perfil.DataCadastro;
+                entity.Perfil.DataAtualizacao = perfil.DataAtualizacao;
+            };
             return _mapper.Map<IEnumerable<UsuarioDTO>>(listEntity);
         }
 
@@ -81,7 +95,7 @@ namespace Api.Service.Services
             }
 
         }
-        
+
 
         public async Task<bool> UpdatePassword(int id, UsuarioDTOPasswordUpdate usuario)
         {

@@ -20,6 +20,9 @@ namespace Api.CrossCutting.Mappings
 
             CreateMap<PerfilDTO, Perfil>()
             .ReverseMap();
+
+            CreateMap<PerfilDTONested, Perfil>()
+            .ReverseMap();
         }
     }
 }

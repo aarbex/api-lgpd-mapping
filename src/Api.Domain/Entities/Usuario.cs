@@ -12,5 +12,9 @@ namespace Api.Domain.Entities
 
         [NotMapped]
         public string SenhaNova { get; set; }
+
+        public int PerfilID { get; set; }
+
+        public virtual Perfil Perfil { get; set; }
     }
 }

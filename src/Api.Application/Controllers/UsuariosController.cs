@@ -20,7 +20,7 @@ namespace Api.Application.Controllers
             _service = service;
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -40,7 +40,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpGet]
         [Route("{id}", Name = "GetUsuarioById")]
         public async Task<ActionResult> Get(int id)
@@ -61,7 +61,7 @@ namespace Api.Application.Controllers
 
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] UsuarioDTOCreate usuario)
         {

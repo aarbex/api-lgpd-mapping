@@ -1,4 +1,5 @@
 using System;
+using Api.Domain.DTOs.Perfil;
 
 namespace Api.Domain.DTOs.Usuario
 {
@@ -11,6 +12,8 @@ namespace Api.Domain.DTOs.Usuario
         public string Email { get; set; }
 
         public bool Ativo { get; set; }
+
+        public int PerfilID { get; set; }
 
         public DateTime DataCadastro { get; set; }
 

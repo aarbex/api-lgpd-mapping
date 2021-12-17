@@ -21,6 +21,8 @@ namespace Api.CrossCutting.Mappings
             .ReverseMap();
             CreateMap<PerfilModel, PerfilDTOWrite>()
             .ReverseMap();
+            CreateMap<PerfilModel, PerfilDTONested>()
+            .ReverseMap();
         }
     }
 }

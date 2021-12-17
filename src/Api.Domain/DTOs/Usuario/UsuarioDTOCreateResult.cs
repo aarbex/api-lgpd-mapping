@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Api.Domain.DTOs.Perfil;
 
 namespace Api.Domain.DTOs.Usuario
 {
@@ -10,6 +11,8 @@ namespace Api.Domain.DTOs.Usuario
         public string Nome { get; set; }
 
         public string Email { get; set; }
+
+        public int PerfilID { get; set; }
 
         public bool Ativo { get; set; }
 

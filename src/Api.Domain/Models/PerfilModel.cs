@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Api.Domain.Entities;
 
 namespace Api.Domain.Models
 {
@@ -36,6 +38,14 @@ namespace Api.Domain.Models
             get { return _dataAtualizacao; }
             set { _dataAtualizacao = value; }
         }
+
+        private ICollection<Usuario> _usuarios;
+        public ICollection<Usuario> Usuarios
+        {
+            get { return _usuarios; }
+            set { _usuarios = value; }
+        }
+
     }
 }
 

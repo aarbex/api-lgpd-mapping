@@ -1,4 +1,5 @@
 using System;
+using Api.Domain.Entities;
 
 namespace Api.Domain.Models
 {
@@ -58,5 +59,21 @@ namespace Api.Domain.Models
             get { return _dataAtualizacao; }
             set { _dataAtualizacao = value; }
         }
+
+        private int _perfilID;
+        public int PerfilID
+        {
+            get { return _perfilID; }
+            set { _perfilID = value; }
+        }
+
+        private Perfil _perfil;
+        public virtual Perfil Perfil
+        {
+            get { return _perfil; }
+            set { _perfil = value; }
+        }
+
+
     }
 }

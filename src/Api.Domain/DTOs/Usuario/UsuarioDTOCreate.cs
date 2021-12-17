@@ -12,5 +12,7 @@ namespace Api.Domain.DTOs.Usuario
         [EmailAddress(ErrorMessage = "Email inválido!")]
         [StringLength(100, ErrorMessage = "Email seve ter no máximo {1} caracteres!")]
         public string Email { get; set; }
+
+        public int PerfilID { get; set; }
     }
 }
