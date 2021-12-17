@@ -117,6 +117,33 @@ namespace Api.Application.Controllers
         }
 
         [Authorize("Bearer")]
+        [HttpPut("inativar/{id}")]
+        public async Task<ActionResult> Inactivate(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _service.Inactivate(id);
+                if (result)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return BadRequest("Não foi possível inativar o usuário!");
+                }
+            }
+            catch (ArgumentException e)
+            {
+
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

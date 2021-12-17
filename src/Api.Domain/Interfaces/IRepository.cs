@@ -10,6 +10,7 @@ namespace Api.Domain.Interfaces
         Task<T> InsertAsync(T item);
         Task<T> UpdateAsync(int id, T item);
         Task<bool> DeleteAsync(int id);
+        Task<bool> InactivateAsync(int id);
         Task<T> SelectAsync(int id);
         Task<IEnumerable<T>> SelectAsync();
         Task<bool> ExistAsync(int id);

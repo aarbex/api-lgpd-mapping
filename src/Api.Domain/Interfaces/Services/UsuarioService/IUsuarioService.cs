@@ -13,6 +13,7 @@ namespace Api.Domain.Interfaces.Services.UsuarioService
         Task<UsuarioDTOCreateResult> Post(UsuarioDTOCreate usuario);
         Task<UsuarioDTOUpdateResult> Put(int id, UsuarioDTOUpdate usuario);
         Task<bool> Delete(int id);
+        Task<bool> Inactivate(int id);
         Task<bool> UpdatePassword(int id, UsuarioDTOPasswordUpdate usuario);
         Task<bool> ResetPassword(int id);
     }

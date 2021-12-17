@@ -66,6 +66,23 @@ namespace Api.Service.Services
             return _mapper.Map<UsuarioDTOUpdateResult>(result);
         }
 
+        public async Task<bool> Inactivate(int id)
+        {
+            var entidade = await _repository.SelectAsync(id);
+
+
+            if (entidade != null)
+            {
+                return await _repository.InactivateAsync(id);
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        
+
         public async Task<bool> UpdatePassword(int id, UsuarioDTOPasswordUpdate usuario)
         {
 

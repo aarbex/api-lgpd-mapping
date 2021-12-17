@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.Data.Context;
 using Api.Domain.Entities;
@@ -69,7 +70,7 @@ namespace Api.Data.Repository
         {
             try
             {
-                return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+                return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id) && p.Ativo == true);
             }
             catch (Exception ex)
             {
@@ -82,7 +83,7 @@ namespace Api.Data.Repository
         {
             try
             {
-                return await _dataset.ToListAsync();
+                return await _dataset.Where(p => p.Ativo == true).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -113,6 +114,29 @@ namespace Api.Data.Repository
             }
 
             return item;
+        }
+
+        public async Task<bool> InactivateAsync(int id)
+        {
+            try
+            {
+                var result = await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+                if (result == null)
+                    return false;
+
+                result.DataAtualizacao = DateTime.UtcNow;
+                result.Ativo = false;
+
+                _context.Entry(result).CurrentValues.SetValues(result);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error: ", ex);
+            }
+
+            return true;
         }
     }
 }
