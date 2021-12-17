@@ -1,3 +1,4 @@
+using Api.Domain.Interfaces.Services.PerfilService;
 using Api.Domain.Interfaces.Services.UsuarioService;
 using Api.Service.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ namespace Api.CrossCutting.DependencyInjection
         {
             servicesCollection.AddTransient<IUsuarioService, UsuarioService>();
             servicesCollection.AddTransient<ILoginService, LoginService>();
+            servicesCollection.AddTransient<IPerfilService, PerfilService>();
         }
     }
 }

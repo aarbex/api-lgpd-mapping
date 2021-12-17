@@ -1,3 +1,4 @@
+using Api.Domain.DTOs.Perfil;
 using Api.Domain.DTOs.Usuario;
 using Api.Domain.Models;
 using AutoMapper;
@@ -15,6 +16,10 @@ namespace Api.CrossCutting.Mappings
             CreateMap<UsuarioModel, UsuarioDTOUpdate>()
             .ReverseMap();
             CreateMap<UsuarioModel, UsuarioDTOPasswordUpdate>()
+            .ReverseMap();
+            CreateMap<PerfilModel, PerfilDTO>()
+            .ReverseMap();
+            CreateMap<PerfilModel, PerfilDTOWrite>()
             .ReverseMap();
         }
     }

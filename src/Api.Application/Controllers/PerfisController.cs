@@ -1,9 +1,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Domain.DTOs.Usuario;
-using Api.Domain.Entities;
-using Api.Domain.Interfaces.Services.UsuarioService;
+using Api.Domain.DTOs.Perfil;
+using Api.Domain.Interfaces.Services.PerfilService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +10,11 @@ namespace Api.Application.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class PerfisController : ControllerBase
     {
+        private IPerfilService _service;
 
-        private IUsuarioService _service;
-        public UsuariosController(IUsuarioService service)
+        public PerfisController(IPerfilService service)
         {
             _service = service;
         }
@@ -42,7 +41,7 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpGet]
-        [Route("{id}", Name = "GetUsuarioById")]
+        [Route("{id}", Name = "GetPerfilById")]
         public async Task<ActionResult> Get(int id)
         {
             if (!ModelState.IsValid)
@@ -63,7 +62,7 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UsuarioDTOCreate usuario)
+        public async Task<ActionResult> Post([FromBody] PerfilDTOWrite perfil)
         {
             if (!ModelState.IsValid)
             {
@@ -72,10 +71,10 @@ namespace Api.Application.Controllers
 
             try
             {
-                var result = await _service.Post(usuario);
+                var result = await _service.Post(perfil);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetUsuarioById", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetPerfilById", new { id = result.Id })), result);
                 }
                 else
                 {
@@ -91,7 +90,7 @@ namespace Api.Application.Controllers
 
         [Authorize("Bearer")]
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] UsuarioDTOUpdate usuario)
+        public async Task<ActionResult> Put(int id, [FromBody] PerfilDTOWrite perfil)
         {
             if (!ModelState.IsValid)
             {
@@ -99,7 +98,7 @@ namespace Api.Application.Controllers
             }
             try
             {
-                var result = await _service.Put(id, usuario);
+                var result = await _service.Put(id, perfil);
                 if (result != null)
                 {
                     return Ok(result);
@@ -133,7 +132,7 @@ namespace Api.Application.Controllers
                 }
                 else
                 {
-                    return BadRequest("Não foi possível inativar o usuário!");
+                    return BadRequest("Não foi possível inativar o perfil!");
                 }
             }
             catch (ArgumentException e)
@@ -154,60 +153,6 @@ namespace Api.Application.Controllers
             try
             {
                 return Ok(await _service.Delete(id));
-            }
-            catch (ArgumentException e)
-            {
-
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
-        [HttpPut("update-password/{id}")]
-        public async Task<ActionResult> UpdatePassword(int id, [FromBody] UsuarioDTOPasswordUpdate usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                var result = await _service.UpdatePassword(id, usuario);
-                if (result)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest("A senha atual informada não confere a cadastrada na base de dados");
-                }
-            }
-            catch (ArgumentException e)
-            {
-
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
-            }
-        }
-
-        [Authorize("Bearer")]
-        [HttpPut("reset-password/{id}")]
-        public async Task<ActionResult> ResetPassword(int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                var result = await _service.ResetPassword(id);
-                if (result)
-                {
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest("Falha ao resetar a senha!");
-                }
             }
             catch (ArgumentException e)
             {

@@ -101,6 +101,7 @@ namespace Api.Data.Repository
                     return null;
 
                 item.Id = result.Id;
+                item.Ativo = result.Ativo;
                 item.DataAtualizacao = DateTime.UtcNow;
                 item.DataCadastro = result.DataCadastro;
 

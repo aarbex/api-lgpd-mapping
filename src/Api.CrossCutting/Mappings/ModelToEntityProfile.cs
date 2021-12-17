@@ -10,6 +10,9 @@ namespace Api.CrossCutting.Mappings
         {
             CreateMap<Usuario, UsuarioModel>()
                 .ReverseMap();
+
+            CreateMap<Perfil, PerfilModel>()
+                .ReverseMap();
         }
     }
 }
