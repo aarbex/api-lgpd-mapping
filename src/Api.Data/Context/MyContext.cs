@@ -10,7 +10,8 @@ namespace Api.Data.Context
     {
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Perfil> Perfil { get; set; }
-        public DbSet<Perfil> Formato { get; set; }
+        public DbSet<Formato> Formato { get; set; }
+        public DbSet<Categoria> Categoria { get; set; }
 
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
@@ -19,6 +20,7 @@ namespace Api.Data.Context
             modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
             modelBuilder.Entity<Perfil>(new PerfilMap().Configure);
             modelBuilder.Entity<Formato>(new FormatoMap().Configure);
+            modelBuilder.Entity<Categoria>(new CategoriaMap().Configure);
         }
     }
 
