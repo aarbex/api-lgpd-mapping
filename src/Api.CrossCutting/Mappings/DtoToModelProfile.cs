@@ -1,6 +1,8 @@
+using Api.Domain.DTOs.Parametros.Formato;
 using Api.Domain.DTOs.Perfil;
 using Api.Domain.DTOs.Usuario;
 using Api.Domain.Models;
+using Api.Domain.Models.Parametros;
 using AutoMapper;
 
 namespace Api.CrossCutting.Mappings
@@ -22,6 +24,12 @@ namespace Api.CrossCutting.Mappings
             CreateMap<PerfilModel, PerfilDTOWrite>()
             .ReverseMap();
             CreateMap<PerfilModel, PerfilDTONested>()
+            .ReverseMap();
+            CreateMap<FormatoModel, FormatoDTO>()
+            .ReverseMap();
+            CreateMap<FormatoModel, FormatoDTOWrite>()
+            .ReverseMap();
+            CreateMap<FormatoModel, FormatoDTONested>()
             .ReverseMap();
         }
     }
