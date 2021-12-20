@@ -2,7 +2,7 @@ using System;
 
 namespace Api.Domain.Models.Parametros
 {
-    public class FormatoModel
+    public class CategoriaModel
     {
         private int _id;
         public int Id
@@ -15,13 +15,6 @@ namespace Api.Domain.Models.Parametros
         {
             get { return _nome; }
             set { _nome = value; }
-        }
-
-        private string _descricao;
-        public string Descricao
-        {
-            get { return _descricao; }
-            set { _descricao = value; }
         }
 
         private bool _ativo;

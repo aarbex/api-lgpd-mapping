@@ -19,6 +19,7 @@ namespace Api.CrossCutting.DependencyInjection
             serviceCollection.AddScoped<IUsuarioRepository, UsuarioImplementation>();
             serviceCollection.AddScoped<IPerfilRepository, PerfilImplementation>();
             serviceCollection.AddScoped<IFormatoRepository, FormatoImplementation>();
+            serviceCollection.AddScoped<ICategoriaRepository, CategoriaImplementation>();
 
             if (Environment.GetEnvironmentVariable("DATABASE").ToLower() == "SQLSERVER".ToLower())
             {

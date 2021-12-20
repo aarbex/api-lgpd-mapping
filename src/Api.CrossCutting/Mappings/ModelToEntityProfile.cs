@@ -18,6 +18,9 @@ namespace Api.CrossCutting.Mappings
 
             CreateMap<Formato, FormatoModel>()
                 .ReverseMap();
+
+            CreateMap<Categoria, CategoriaModel>()
+                .ReverseMap();
         }
     }
 }

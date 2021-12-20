@@ -15,6 +15,7 @@ namespace Api.CrossCutting.DependencyInjection
             servicesCollection.AddTransient<ILoginService, LoginService>();
             servicesCollection.AddTransient<IPerfilService, PerfilService>();
             servicesCollection.AddTransient<IFormatoService, FormatoService>();
+            servicesCollection.AddTransient<ICategoriaService, CategoriaService>();
         }
     }
 }

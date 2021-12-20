@@ -8,8 +8,8 @@ namespace Api.Domain.Interfaces.Services.Parametros
     {
         Task<FormatoDTO> Get(int id);
         Task<IEnumerable<FormatoDTO>> GetAll();
-        Task<FormatoDTO> Post(FormatoDTOWrite Formato);
-        Task<FormatoDTO> Put(int id, FormatoDTOWrite Formato);
+        Task<FormatoDTO> Post(FormatoDTOWrite formato);
+        Task<FormatoDTO> Put(int id, FormatoDTOWrite formato);
         Task<bool> Delete(int id);
         Task<bool> Inactivate(int id);
     }

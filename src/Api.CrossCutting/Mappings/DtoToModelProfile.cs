@@ -1,3 +1,4 @@
+using Api.Domain.DTOs.Parametros.Categoria;
 using Api.Domain.DTOs.Parametros.Formato;
 using Api.Domain.DTOs.Perfil;
 using Api.Domain.DTOs.Usuario;
@@ -30,6 +31,12 @@ namespace Api.CrossCutting.Mappings
             CreateMap<FormatoModel, FormatoDTOWrite>()
             .ReverseMap();
             CreateMap<FormatoModel, FormatoDTONested>()
+            .ReverseMap();
+            CreateMap<CategoriaModel, CategoriaDTO>()
+            .ReverseMap();
+            CreateMap<CategoriaModel, CategoriaDTOWrite>()
+            .ReverseMap();
+            CreateMap<CategoriaModel, CategoriaDTONested>()
             .ReverseMap();
         }
     }

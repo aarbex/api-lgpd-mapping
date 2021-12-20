@@ -19,7 +19,7 @@ namespace Api.Application.Controllers
             _service = service;
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -39,7 +39,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet]
         [Route("{id}", Name = "GetFormatoById")]
         public async Task<ActionResult> Get(int id)
@@ -60,7 +60,7 @@ namespace Api.Application.Controllers
 
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] FormatoDTOWrite formato)
         {
@@ -88,7 +88,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] FormatoDTOWrite formato)
         {
@@ -115,7 +115,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpPut("inativar/{id}")]
         public async Task<ActionResult> Inactivate(int id)
         {
@@ -142,7 +142,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        // [Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
