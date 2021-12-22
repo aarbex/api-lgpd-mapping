@@ -1,8 +1,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Domain.DTOs.Parametros.Categoria;
-using Api.Domain.Interfaces.Services.Parametros;
+using Api.Domain.DTOs.Controlador;
+using Api.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +10,16 @@ namespace Api.Application.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    public class CategoriasController : ControllerBase
+    public class ControladoresController : ControllerBase
     {
-        private ICategoriaService _service;
+        private IControladorService _service;
 
-        public CategoriasController(ICategoriaService service)
+        public ControladoresController(IControladorService service)
         {
             _service = service;
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
@@ -39,9 +39,9 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpGet]
-        [Route("{id}", Name = "GetCategoriaById")]
+        [Route("{id}", Name = "GetControladorById")]
         public async Task<ActionResult> Get(int id)
         {
             if (!ModelState.IsValid)
@@ -60,9 +60,9 @@ namespace Api.Application.Controllers
 
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CategoriaDTOWrite categoria)
+        public async Task<ActionResult> Post([FromBody] ControladorDTOWrite controlador)
         {
             if (!ModelState.IsValid)
             {
@@ -71,10 +71,10 @@ namespace Api.Application.Controllers
 
             try
             {
-                var result = await _service.Post(categoria);
+                var result = await _service.Post(controlador);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetCategoriaById", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetControladorById", new { id = result.Id })), result);
                 }
                 else
                 {
@@ -88,9 +88,9 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CategoriaDTOWrite categoria)
+        public async Task<ActionResult> Put(int id, [FromBody] ControladorDTOWrite controlador)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Api.Application.Controllers
             }
             try
             {
-                var result = await _service.Put(id, categoria);
+                var result = await _service.Put(id, controlador);
                 if (result != null)
                 {
                     return Ok(result);
@@ -115,7 +115,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpPut("inativar/{id}")]
         public async Task<ActionResult> Inactivate(int id)
         {
@@ -132,7 +132,7 @@ namespace Api.Application.Controllers
                 }
                 else
                 {
-                    return BadRequest("Não foi possível inativar a categoria de dados pessoais!");
+                    return BadRequest("Não foi possível inativar o controlador!");
                 }
             }
             catch (ArgumentException e)
@@ -142,7 +142,7 @@ namespace Api.Application.Controllers
             }
         }
 
-        [Authorize("Bearer")]
+        // [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

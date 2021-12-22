@@ -1,9 +1,7 @@
-using Api.Domain.DTOs.Parametros.Categoria;
-using Api.Domain.DTOs.Parametros.Formato;
+using Api.Domain.DTOs.Controlador;
 using Api.Domain.DTOs.Perfil;
 using Api.Domain.DTOs.Usuario;
 using Api.Domain.Entities;
-using Api.Domain.Entities.Parametros;
 using AutoMapper;
 
 namespace Api.CrossCutting.Mappings
@@ -27,16 +25,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<PerfilDTONested, Perfil>()
             .ReverseMap();
 
-            CreateMap<FormatoDTO, Formato>()
-            .ReverseMap();
-
-            CreateMap<FormatoDTONested, Formato>()
-            .ReverseMap();
-
-            CreateMap<CategoriaDTO, Categoria>()
-            .ReverseMap();
-
-            CreateMap<CategoriaDTONested, Categoria>()
+            CreateMap<ControladorDTO, Controlador>()
             .ReverseMap();
         }
     }

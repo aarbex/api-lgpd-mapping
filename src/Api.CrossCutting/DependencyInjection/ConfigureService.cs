@@ -1,8 +1,7 @@
-using Api.Domain.Interfaces.Services.Parametros;
+using Api.Domain.Interfaces.Services;
 using Api.Domain.Interfaces.Services.PerfilService;
 using Api.Domain.Interfaces.Services.UsuarioService;
 using Api.Service.Services;
-using Api.Service.Services.Parametros;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.CrossCutting.DependencyInjection
@@ -14,8 +13,7 @@ namespace Api.CrossCutting.DependencyInjection
             servicesCollection.AddTransient<IUsuarioService, UsuarioService>();
             servicesCollection.AddTransient<ILoginService, LoginService>();
             servicesCollection.AddTransient<IPerfilService, PerfilService>();
-            servicesCollection.AddTransient<IFormatoService, FormatoService>();
-            servicesCollection.AddTransient<ICategoriaService, CategoriaService>();
+            servicesCollection.AddTransient<IControladorService, ControladorService>();
         }
     }
 }

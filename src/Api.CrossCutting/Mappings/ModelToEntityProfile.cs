@@ -1,7 +1,5 @@
 using Api.Domain.Entities;
-using Api.Domain.Entities.Parametros;
 using Api.Domain.Models;
-using Api.Domain.Models.Parametros;
 using AutoMapper;
 
 namespace Api.CrossCutting.Mappings
@@ -16,10 +14,7 @@ namespace Api.CrossCutting.Mappings
             CreateMap<Perfil, PerfilModel>()
                 .ReverseMap();
 
-            CreateMap<Formato, FormatoModel>()
-                .ReverseMap();
-
-            CreateMap<Categoria, CategoriaModel>()
+            CreateMap<Controlador, ControladorModel>()
                 .ReverseMap();
         }
     }
