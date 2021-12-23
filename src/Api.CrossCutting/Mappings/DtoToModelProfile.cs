@@ -1,4 +1,6 @@
 using Api.Domain.DTOs.Controlador;
+using Api.Domain.DTOs.Dado;
+using Api.Domain.DTOs.DataMapping;
 using Api.Domain.DTOs.Perfil;
 using Api.Domain.DTOs.Usuario;
 using Api.Domain.Models;
@@ -27,6 +29,16 @@ namespace Api.CrossCutting.Mappings
             CreateMap<ControladorModel, ControladorDTO>()
             .ReverseMap();
             CreateMap<ControladorModel, ControladorDTOWrite>()
+            .ReverseMap();
+            CreateMap<DataMappingModel, DataMappingDTO>()
+            .ReverseMap();
+            CreateMap<DataMappingModel, DataMappingDTOWrite>()
+            .ReverseMap();
+            CreateMap<DadoModel, DadoDTO>()
+            .ReverseMap();
+            CreateMap<DadoModel, DadoDTOWrite>()
+            .ReverseMap();
+            CreateMap<DadoModel, DadoDTONested>()
             .ReverseMap();
         }
     }

@@ -8,9 +8,6 @@ namespace Api.Domain.Enums
         Comuns = 1,
 
         [Description("Dados Pessoais Sensíveis")]
-        Sensiveis = 2,
-
-        [Description("Dados Pessoais de Crianças e Adolescentes")]
-        CriancasAdolescentes = 3,
+        Sensiveis = 2
     }
 }

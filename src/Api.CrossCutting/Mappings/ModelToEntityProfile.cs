@@ -16,6 +16,12 @@ namespace Api.CrossCutting.Mappings
 
             CreateMap<Controlador, ControladorModel>()
                 .ReverseMap();
+
+            CreateMap<Dado, DadoModel>()
+                .ReverseMap();
+
+            CreateMap<DataMapping, DataMappingModel>()
+                .ReverseMap();
         }
     }
 }

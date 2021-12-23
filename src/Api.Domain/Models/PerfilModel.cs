@@ -40,7 +40,7 @@ namespace Api.Domain.Models
         }
 
         private ICollection<Usuario> _usuarios;
-        public ICollection<Usuario> Usuarios
+        public virtual ICollection<Usuario> Usuarios
         {
             get { return _usuarios; }
             set { _usuarios = value; }

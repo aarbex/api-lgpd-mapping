@@ -96,6 +96,110 @@ namespace Data.Migrations
                     b.ToTable("Controlador");
                 });
 
+            modelBuilder.Entity("Api.Domain.Entities.Dado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DataMappingID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DataMappingID");
+
+                    b.ToTable("Dado");
+                });
+
+            modelBuilder.Entity("Api.Domain.Entities.DataMapping", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AnoReferencia")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
+
+                    b.Property<string>("Area")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool?>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("BaseLegal")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DadosCriancasAdolescentes")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DonoProcesso")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Formato")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Frequencia")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MesReferencia")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("NaturezaTitular")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Origem")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Processo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Tratamento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Volume")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DataMapping");
+                });
+
             modelBuilder.Entity("Api.Domain.Entities.Perfil", b =>
                 {
                     b.Property<int>("Id")
@@ -164,6 +268,17 @@ namespace Data.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("Api.Domain.Entities.Dado", b =>
+                {
+                    b.HasOne("Api.Domain.Entities.DataMapping", "DataMapping")
+                        .WithMany("Dados")
+                        .HasForeignKey("DataMappingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DataMapping");
+                });
+
             modelBuilder.Entity("Api.Domain.Entities.Usuario", b =>
                 {
                     b.HasOne("Api.Domain.Entities.Perfil", "Perfil")
@@ -173,6 +288,11 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Perfil");
+                });
+
+            modelBuilder.Entity("Api.Domain.Entities.DataMapping", b =>
+                {
+                    b.Navigation("Dados");
                 });
 
             modelBuilder.Entity("Api.Domain.Entities.Perfil", b =>

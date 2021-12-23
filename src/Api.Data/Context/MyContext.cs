@@ -9,6 +9,8 @@ namespace Api.Data.Context
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Perfil> Perfil { get; set; }
         public DbSet<Controlador> Controlador { get; set; }
+        public DbSet<Dado> Dado { get; set; }
+        public DbSet<DataMapping> DataMapping { get; set; }
 
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
@@ -17,6 +19,8 @@ namespace Api.Data.Context
             modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
             modelBuilder.Entity<Perfil>(new PerfilMap().Configure);
             modelBuilder.Entity<Controlador>(new ControladorMap().Configure);
+            modelBuilder.Entity<Dado>(new DadoMap().Configure);
+            modelBuilder.Entity<DataMapping>(new DataMappingMap().Configure);
         }
     }
 
